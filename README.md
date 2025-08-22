@@ -289,6 +289,8 @@ div.tab p { margin: 0.5em; }
 アフター
 出来上がり次第添付
 
+Figma：(https://www.figma.com/design/TD64AvRf7tlBDGfRjwwYMN/%E3%83%90%E3%82%B9%E3%81%AE%E6%99%82%E5%88%BB%E8%A1%A8?node-id=0-1&t=LiHB6ZzTHcKvfQHr-1)
+
 ### 🎮 ステップ3：オリジナルアプリ開発
 
 現在構想中：

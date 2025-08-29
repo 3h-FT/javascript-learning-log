@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusTimes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <section id="current-time">
+            <h2>現在時刻</h2>
+            <div id="time">00:00:00</div>
+        </section>
+
+        <section class="destination">
+            <img width="48" height="48" src="https://img.icons8.com/fluency/48/bus-stop.png" alt="bus-stop"/>
+            <h3>○○○○ ▶ ××××行</h3>
+            <button id="toggle-destination">目的地の切り替え</button>
+        </section>
+
+        <section class="next-time">
+            <h3>NEXT 出発時刻</h3>
+            <div id="next">00:00</div>
+            <div id="countdown">あと00:00</div>
+        </section>
+        <section class="second-bus">
+            <p>次の次のバス</p>
+            <div id="second">00:00</div>
+        </section>
+        <p>時刻表はこちら</p>
+    </div>
+</body>
+
+</html>

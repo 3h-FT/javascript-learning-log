@@ -7,9 +7,11 @@
   const countdown = document.getElementById("countdown");
   const second = document.getElementById("second");
   const arrivalSecond = document.getElementById("arrival-secondtime");
+  const toggleBtn = document.getElementById("toggle-destination");
+  const destinationTitle = document.querySelector(".destination h3");
 
-  // 毎日同じダイヤ
-  const timetable = [
+  // "○○○○ ▶ ××××行"の時刻表
+  const timetableForward = [
     { depart: "06:00", arrive: "07:00" },
     { depart: "08:00", arrive: "09:00" },
     { depart: "10:00", arrive: "11:00" },
@@ -20,6 +22,25 @@
     { depart: "20:00", arrive: "21:00" },
     { depart: "22:00", arrive: "23:00" },
   ];
+
+  // "×××× ▶ ○○○○行"の時刻表
+  const timetableBackward = [
+    { depart: "07:00", arrive: "08:00" },
+    { depart: "09:00", arrive: "10:00" },
+    { depart: "11:00", arrive: "12:00" },
+    { depart: "13:00", arrive: "14:00" },
+    { depart: "15:00", arrive: "16:00" },
+    { depart: "17:00", arrive: "18:00" },
+    { depart: "19:00", arrive: "20:00" },
+    { depart: "21:00", arrive: "22:00" },
+  ];
+
+  // 今の方向（true = "○○○○ ▶ ××××行"、false =  "×××× ▶ ○○○○行"）
+  let isForward = true;
+
+  function getCurrentTimetable() {
+    return isForward ? timetableForward : timetableBackward;
+  }
 
   function toMinutes(timeStr) {
     const [h, m] = timeStr.split(":").map(Number);
@@ -36,6 +57,8 @@
   }
 
   function updateBusTimes() {
+    const timetable = getCurrentTimetable();
+
     //現在時刻
     const now = new Date();
     const clock = now.toLocaleTimeString("ja-JP", { hour12: false });
@@ -61,11 +84,21 @@
       second.textContent = upcoming[1].depart;
       arrivalSecond.textContent = upcoming[1].arrive;
     } else {
-      // 翌日の最初の便を「次の次」として表示
       second.textContent = timetable[0].depart;
       arrivalSecond.textContent = timetable[0].arrive;
     }
   }
+
+  // 目的地切り替え
+  toggleBtn.addEventListener("click", () => {
+    isForward = !isForward;
+    if (isForward) {
+      destinationTitle.textContent = "○○○○ ▶ ××××行";
+    } else {
+      destinationTitle.textContent = "×××× ▶ ○○○○行";
+    }
+    updateBusTimes();
+  });
 
   setInterval(updateBusTimes, 1000);
   updateBusTimes();

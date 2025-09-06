@@ -1,46 +1,59 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BusTimes</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BusTimes</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="container">
-        <section id="current-time">
-            <h2>現在時刻</h2>
-            <div id="time"></div>
-        </section>
+  <div class="container">
+    <section id="current-time">
+      <h2>現在時刻</h2>
+      <div id="time"></div>
+    </section>
 
-        <section class="destination">
-            <img width="48" height="48" src="https://img.icons8.com/fluency/48/bus-stop.png" alt="bus-stop" />
-            <h3>○○○○ ▶ ××××行</h3>
-            <button id="toggle-destination">目的地の切り替え</button>
-        </section>
+    <section class="destination">
+      <img width="48" height="48" src="https://img.icons8.com/fluency/48/bus-stop.png" alt="bus-stop" />
+      <h3>○○○○ ▶ ××××行</h3>
+      <button id="toggle-destination">目的地の切り替え</button>
+    </section>
 
-        <section class="next-time">
-            <h3>NEXT 出発時刻</h3>
-            <div class="time-group">
-                <div id="next" class="time"></div>
-                <span class="arrow">▶</span>
-                <div id="arrival-time" class="time"></div>
-            </div>
-            <div id="countdown">あと</div>
-        </section>
+    <section class="next-time">
+      <h3>NEXT 出発時刻</h3>
+      <div class="time-group">
+        <div id="next" class="time"></div>
+        <span class="arrow">▶</span>
+        <div id="arrival-time" class="time"></div>
+      </div>
+      <div id="countdown">あと</div>
+    </section>
 
-        <section class="second-bus">
-            <div class="time-group">
-                <div id="second" class="time"></div>
-                <span class="arrow">▶</span>
-                <div id="arrival-secondtime" class="time"></div>
-            </div>
-        </section>
-        <a href="#">時刻表はこちら</a>
-    </div>
-    <script src="main.js"></script>
+    <section class="second-bus">
+      <div class="time-group">
+        <div id="second" class="time"></div>
+        <span class="arrow">▶</span>
+        <div id="arrival-secondtime" class="time"></div>
+      </div>
+    </section>
+
+    <button id="toggle-timetable" class="toggle-button">
+      全体の時刻表を表示
+    </button>
+
+    <section id="all-timetable" style="display:none;">
+      <table>
+        <thead>
+          <tr>
+            <th>出発</th>
+            <th>到着</th>
+          </tr>
+        </thead>
+        <tbody id="timetable-body"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <script src="main.js"></script>
 </body>
-
 </html>

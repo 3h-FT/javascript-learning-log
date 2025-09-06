@@ -1,5 +1,4 @@
 'use strict';
-
 {
   const time = document.getElementById("time");
   const next = document.getElementById("next");
@@ -9,8 +8,10 @@
   const arrivalSecond = document.getElementById("arrival-secondtime");
   const toggleBtn = document.getElementById("toggle-destination");
   const destinationTitle = document.querySelector(".destination h3");
+  const toggleTimetableBtn = document.getElementById("toggle-timetable");
+  const allTimetable = document.getElementById("all-timetable");
+  const timetableBody = document.getElementById("timetable-body");
 
-  // "○○○○ ▶ ××××行"の時刻表
   const timetableForward = [
     { depart: "06:00", arrive: "07:00" },
     { depart: "08:00", arrive: "09:00" },
@@ -23,7 +24,6 @@
     { depart: "22:00", arrive: "23:00" },
   ];
 
-  // "×××× ▶ ○○○○行"の時刻表
   const timetableBackward = [
     { depart: "07:00", arrive: "08:00" },
     { depart: "09:00", arrive: "10:00" },
@@ -35,7 +35,6 @@
     { depart: "21:00", arrive: "22:00" },
   ];
 
-  // 今の方向（true = "○○○○ ▶ ××××行"、false =  "×××× ▶ ○○○○行"）
   let isForward = true;
 
   function getCurrentTimetable() {
@@ -50,36 +49,28 @@
   function formatCountdown(now, departStr) {
     const nowMinutes = now.getHours() * 60 + now.getMinutes();
     let diff = toMinutes(departStr) - nowMinutes;
-    if (diff < 0) diff += 24 * 60; // 翌日分に補正
+    if (diff < 0) diff += 24 * 60;
     const h = Math.floor(diff / 60);
     const m = diff % 60;
-    return `あと${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`;
+    return `あと${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
   }
 
   function updateBusTimes() {
     const timetable = getCurrentTimetable();
-
-    //現在時刻
     const now = new Date();
     const clock = now.toLocaleTimeString("ja-JP", { hour12: false });
     time.textContent = clock;
-
     const nowMinutes = now.getHours() * 60 + now.getMinutes();
-    
-    // 今日の中で未来の便
-    let upcoming = timetable.filter(bus => toMinutes(bus.depart) > nowMinutes);
 
-    // 今日にもう便がなければ翌日のダイヤを表示
+    let upcoming = timetable.filter(bus => toMinutes(bus.depart) > nowMinutes);
     if (upcoming.length === 0) {
       upcoming = timetable;
     }
 
-    // 次のバス
     next.textContent = upcoming[0].depart;
     arrivalTime.textContent = upcoming[0].arrive;
     countdown.textContent = formatCountdown(now, upcoming[0].depart);
 
-    // 次の次のバス
     if (upcoming.length > 1) {
       second.textContent = upcoming[1].depart;
       arrivalSecond.textContent = upcoming[1].arrive;
@@ -89,7 +80,16 @@
     }
   }
 
-  // 目的地切り替え
+  function renderTimetable() {
+    const timetable = getCurrentTimetable();
+    timetableBody.innerHTML = "";
+    timetable.forEach(bus => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${bus.depart}</td><td>${bus.arrive}</td>`;
+      timetableBody.appendChild(tr);
+    });
+  }
+
   toggleBtn.addEventListener("click", () => {
     isForward = !isForward;
     if (isForward) {
@@ -98,8 +98,21 @@
       destinationTitle.textContent = "×××× ▶ ○○○○行";
     }
     updateBusTimes();
+    renderTimetable();
+  });
+
+  toggleTimetableBtn.addEventListener("click", () => {
+    if (allTimetable.style.display === "none") {
+      allTimetable.style.display = "block";
+      toggleTimetableBtn.textContent = "全体の時刻表を隠す";
+      renderTimetable();
+    } else {
+      allTimetable.style.display = "none";
+      toggleTimetableBtn.textContent = "全体の時刻表を表示";
+    }
   });
 
   setInterval(updateBusTimes, 1000);
   updateBusTimes();
+  renderTimetable();
 }

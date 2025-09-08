@@ -70,14 +70,13 @@ Ruby on RailsでWebアプリを開発する中で、フロントエンドのUI/U
 **リメイクでの目標：**
 - [x] JavaScriptで現在時刻の表示処理を実装（外部ライブラリ不使用）
 - [x] 指定時刻までのカウントダウン機能を追加
-- [ ] UIデザインを現代風に改善（レスポンシブ対応）
+- [x] UIデザインを現代風に改善（レスポンシブ対応）
 ※状況によって追加変更あり
 
-📸 **スクリーンショット（ビフォー・アフター）予定**  
-ビフォー（2016年当時の実装）
-
-[![Image from Gyazo](https://i.gyazo.com/c2a1633b1bd716522a3317b2b987e31b.gif)](https://gyazo.com/c2a1633b1bd716522a3317b2b987e31b)
-
+| ビフォー（2016年） | アフター（2025年リメイク） |
+|-----------------|---------------------------|
+| ![Gyazo Before](https://i.gyazo.com/c2a1633b1bd716522a3317b2b987e31b.gif) | ![Gyazo After](https://i.gyazo.com/fb67be7a1f60fc16198659f09b87737c.gif) |
+| **特徴・状況**<br>- HTML/CSS初心者が作成<br>- `bustime.js` 使用<br>- タブ切替と基本表示のみ<br>- 固定幅・古いデザイン | **特徴・改善点**<br>- JavaScriptで現在時刻を自作<br>- 近いバス・次のバスの表示<br>- UIデザインを現代風に改善<br>- レスポンシブ対応・可変幅 |
 <details>
 <summary>📄 旧HTMLコード抜粋（タブ切替と時刻表示）</summary>
 
@@ -287,10 +286,6 @@ div.tab p { margin: 0.5em; }
 ※JSは提供素材のため非公開
 </details>
 
-アフター
-出来上がり次第添付
-
-Figma：(https://www.figma.com/design/TD64AvRf7tlBDGfRjwwYMN/%E3%83%90%E3%82%B9%E3%81%AE%E6%99%82%E5%88%BB%E8%A1%A8?node-id=0-1&t=LiHB6ZzTHcKvfQHr-1)
 
 ### 🎮 ステップ3：オリジナルアプリ開発
 
